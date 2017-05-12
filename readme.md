@@ -8,7 +8,12 @@ Simple cache service using SQLite to reduce multiple db queries.
 ## Basic information
 * **default cache time**: 60mins
 * **default cache path**: Carloshb\CacheService\Driver
-
+## How to install?
+Install using composer
+```shell
+composer require carloshb/cache-service 0.1
+```
+Or clone in or project.
 ### How to change default configs?
 Add PHP env:
 ```php
