@@ -2,6 +2,7 @@
     "name": "carloshb/cache-service",
     "description": "Simple cache service using SQLite to reduce multiple db queries",
     "type": "library",
+    "version": "0.1",
     "require": {
         "php": ">=7.0"
     },
