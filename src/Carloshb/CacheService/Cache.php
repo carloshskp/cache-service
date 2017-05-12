@@ -27,7 +27,7 @@ final class Cache
         if (is_array($result) && !empty($result)):
             $lastUpdate = strtotime($result['updated_at']);
             $difference = time() - $lastUpdate;
-            $time = ($_ENV['cache_time'] ?? 60) * 10;
+            $time = ($_ENV['cache_time'] ?? 60) * 60;
             if($difference <= $time):
                 $this->cache = $result;
             else:

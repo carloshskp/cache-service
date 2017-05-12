@@ -15,7 +15,7 @@
             "email": "contato@carloshb.com.br"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Carloshb\\CacheService\\": ["src/Carloshb/CacheService"]
