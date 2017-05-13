@@ -8,20 +8,13 @@
 
 namespace Carloshb\CacheService;
 
-
-use Carloshb\CacheService\Driver\Model;
+use Carloshb\SqliteModelBasics\Model;
 
 class CacheModel extends Model
 {
     protected $table = "storage";
-    public function __construct()
-    {
-        $this->connect();
-        $this->createTable();
-        $this->disconnect();
-    }
-    private function createTable(){
-        $this->getConn()->exec('CREATE TABLE IF NOT EXISTS storage (
+    public function createTable(\SQLite3 $conn) : bool {
+        return $conn->exec('CREATE TABLE IF NOT EXISTS storage (
             id integer PRIMARY KEY AUTOINCREMENT,
             name text,
             content varchar,
