@@ -14,6 +14,7 @@ class CacheTest extends TestCase
             sleep(5);
             return $data;
         })->getCacheContent();
+        $this->assertEquals(true, $cache->isCached('getInfo'));
         $this->assertJson(json_encode($data, JSON_UNESCAPED_SLASHES), $content);
     }
     public function testExpectedResultsWithoutDelay(){
@@ -32,5 +33,6 @@ class CacheTest extends TestCase
         $cache = new \Carloshb\CacheService\Cache();
         $response = $cache->destroy('getInfo');
         $this->assertEquals(true, $response);
+        $this->assertEquals(false, $cache->isCached('getInfo'));
     }
 }
