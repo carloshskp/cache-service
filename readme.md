@@ -11,7 +11,7 @@ Simple cache service using SQLite to reduce multiple db queries.
 ## How to install?
 Install using composer
 ```shell
-composer require carloshb/cache-service 0.1
+composer require carloshb/cache-service 0.2
 ```
 Or clone in or project.
 ### How to change default configs?
@@ -21,9 +21,9 @@ Add PHP env:
     $_ENV['cache_path'] = 'yor/storage/path';
 ```
 ## Usage
-### resolve(string $key, callable $callback) : Cache
+### resolve(string $key, callable $callback [, int $time = 60]) : Cache
 The method **resolve()** returns an instance of Cache class and generate or update the key sent with the callback return. First parameter is the key, a string.
-Second parameter is the callback, a function returning array with expected results
+Second parameter is the callback, a function returning array with expected results. Third parameter is optional, for set *n* minutes for cache. 
 ```php
     $cache = new \Carloshb\CacheService\Cache();
     $cache->resolve('getInfo', function(){
