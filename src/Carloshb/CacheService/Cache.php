@@ -12,13 +12,14 @@ final class Cache
 {
     private $callback;
     private $cache;
+    private $time;
 
     /**
      * @param string $key
      * @return bool
      */
     public function isCached(string $key) : bool {
-        $cache = new CacheModel();
+        $cache = new CacheDriver();
         $result = $cache->where([
             'field' => 'name',
             'operation' => '=',
@@ -27,7 +28,7 @@ final class Cache
         if (is_array($result) && !empty($result)):
             $lastUpdate = strtotime($result['updated_at']);
             $difference = time() - $lastUpdate;
-            $time = ($_ENV['cache_time'] ?? 60) * 60;
+            $time = $this->time ?? 60;
             if($difference <= $time):
                 $this->cache = $result;
             else:
@@ -44,7 +45,7 @@ final class Cache
      */
     protected function updateCache(string $key){
         $callback = $this->callback;
-        $cache = new CacheModel();
+        $cache = new CacheDriver();
         $cache->where([
             'field' => 'name',
             'operation' => '=',
@@ -64,7 +65,7 @@ final class Cache
      * @param string $key
      */
     protected function createCache(string $key){
-        $cache = new CacheModel();
+        $cache = new CacheDriver();
         $callback = $this->callback;
         $time = date('Y-m-d H:i:s');
         $cache->save([
@@ -85,8 +86,12 @@ final class Cache
      * @param callable $callback
      * @return Cache
      */
-    public function resolve(string $key, callable $callback) : Cache {
+    public function resolve(string $key, callable $callback, int $time = 60) : Cache {
         $this->callback = $callback;
+        if($time == 60):
+            $time = getenv('cache_time') ?? $time;
+        endif;
+        $this->time = $time;
         if (!$this->isCached($key)):
             $this->createCache($key);
         endif;
@@ -98,7 +103,7 @@ final class Cache
      * @return bool
      */
     public function destroy(string $key) : bool {
-        $cache = new CacheModel();
+        $cache = new CacheDriver();
         $result = $cache->where([
             'field' => 'name',
             'operation' => '=',
