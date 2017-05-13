@@ -10,7 +10,7 @@ namespace Carloshb\CacheService;
 
 use Carloshb\SqliteModelBasics\Model;
 
-class CacheModel extends Model
+class CacheDriver extends Model
 {
     protected $table = "storage";
     public function createTable(\SQLite3 $conn) : bool {
