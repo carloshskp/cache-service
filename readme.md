@@ -11,13 +11,13 @@ Simple cache service using SQLite to reduce multiple db queries.
 ## How to install?
 Install using composer
 ```shell
-composer require carloshb/cache-service 0.2
+composer require carloshb/cache-service 0.2.*
 ```
 Or clone in or project.
 ### How to change default configs?
 Add PHP env:
 ```php
-    $_ENV['cache_time] = 10; // minutes
+    $_ENV['cache_time'] = 10; // minutes
     $_ENV['cache_path'] = 'yor/storage/path';
 ```
 ## Usage
